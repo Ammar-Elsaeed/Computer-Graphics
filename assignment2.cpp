@@ -19,33 +19,43 @@ void init(void)
 
 void display(void)
 {
-    //Draw Body
+    
     glClear(GL_COLOR_BUFFER_BIT);
-    glPushMatrix();
+    //Draw Body
+    glPushMatrix(); //original push
+
     glRotatef(angle2, 1.0, 0.0, 0.0);
     glRotatef(angle, 0.0, 1.0, 0.0);
     glTranslatef(-1.0, 0.0, 0.0);
     glTranslatef(1.0, 1.0, -2.0);
-    glPushMatrix();
+
+    glPushMatrix(); //1
     glScalef(1.0, 2.0, 0.5);
     glutWireCube(2.0);
-    glPopMatrix();
+    glPopMatrix();//1
 
     // Draw Head
-    glPushMatrix();
+    glPushMatrix();//2
+
     glTranslatef(-1.0, 3.0, 0.0);
     glTranslatef(1.0, 0.0, 0.0);
-    glPushMatrix();
+
+    glPushMatrix();//3
     glScalef(1.0, 1.0, 1.0);
     glutWireSphere(0.5, 10, 8);
-    glPopMatrix();
+    glPopMatrix();//3
+
+    glPopMatrix();//2
 
     //Draw right Hip 
-    glPopMatrix();
+   
     glPushMatrix();
     glTranslatef(0.5, -3.0, 0.0);
-    glRotatef((GLfloat)rightHip, 1.0, 0.0, 0.0);
     glTranslatef(0.15, 0.0, 0.0);
+    glTranslatef(0.0, 1.0, 0.0);
+    glRotatef((GLfloat)rightHip, 1.0, 0.0, 0.0);
+    glTranslatef(0.0, -1.0, 0.0);
+
     glPushMatrix();
     glScalef(0.3, 1.0, 0.5);
     glutWireCube(2);
@@ -53,9 +63,11 @@ void display(void)
 
 
     //Draw right Knee 
-    glTranslatef(0.0, -2.0, 0.0);
+    glTranslatef(0.0 , -2.0 , 0.0);
+    glTranslatef(0.0, 1.0, 0.0);
     glRotatef((GLfloat)rightKnee, 1.0, 0.0, 0.0);
-    glTranslatef(0.0, 0.0, 0.0);
+    glTranslatef(0.0 ,-1.0 , 0.0);
+
     glPushMatrix();
     glScalef(0.3, 1.0, 0.5);
     glutWireCube(2);
@@ -64,18 +76,23 @@ void display(void)
     //Draw right Foot 
     glTranslatef(0.0, -1.2, 0.0);
     glTranslatef(0.0, 0.0, 0.0);
+
     glPushMatrix();
     glScalef(0.5, 0.2, 1.2);
     glutSolidCube(2);
     glPopMatrix();
 
+    glPopMatrix();
 
     //Draw left Hip 
-    glPopMatrix();
+   
     glPushMatrix();
     glTranslatef(-0.8, -3.0, 0.0);
-    glRotatef((GLfloat)leftHip, 1.0, 0.0, 0.0);
     glTranslatef(0.15, 0.0, 0.0);
+    glTranslatef(0.0, 1.0, 0.0);
+    glRotatef((GLfloat)leftHip, 1.0, 0.0, 0.0);
+    glTranslatef(0.0, -1.0, 0.0);
+    
     glPushMatrix();
     glScalef(0.3, 1.0, 0.5);
     glutWireCube(2);
@@ -83,7 +100,9 @@ void display(void)
 
     //Draw left Knee 
     glTranslatef(0.0, -2.0, 0.0);
+    glTranslatef(0.0, 1.0, 0.0);
     glRotatef((GLfloat)leftKnee, 1.0, 0.0, 0.0);
+    glTranslatef(0.0, -1.0, 0.0);
     glTranslatef(0.0, 0.0, 0.0);
     glPushMatrix();
     glScalef(0.3, 1.0, 0.5);
@@ -97,13 +116,17 @@ void display(void)
     glScalef(0.5, 0.2, 1.2);
     glutSolidCube(2);
     glPopMatrix();
+    glPopMatrix();
 
     //Draw right Shoulder
-    glPopMatrix();
+
     glPushMatrix();
     glTranslatef(0.5, 1.0, 0.0);
     glTranslatef(1.0, 0.0, 0.0);
-    glRotatef((GLfloat)shoulder, 0.0, 0.0, 1.0);
+    glTranslatef(-1.5, 1.0, 0.0);
+    glRotatef((GLfloat)shoulder, 1.0, 0.0, 0.0);
+    glTranslatef(1.5, -1.0, 0.0);
+
     glPushMatrix();
     glScalef(0.2, 1.0, 0.2);
     glutWireCube(2);
@@ -113,19 +136,26 @@ void display(void)
     //Draw right Elbow
     glTranslatef(1.0, 0.0, 0.0);
     glTranslatef(-1.0, -2.0, 0.0);
-    glRotatef((GLfloat)elbow, 1.0, 0.0, 0.0);
+    glTranslatef(1.5, 1.0, 0.0);
+    glRotatef((GLfloat)elbow,1, 0.0, 0);
+    glTranslatef(-1.5, -1.0, 0.0);
     glPushMatrix();
     glScalef(0.2, 1.0, 0.2);
     glutWireCube(2);
     glPopMatrix();
 
+    glPopMatrix();
 
     //Draw left Shoulder
-    glPopMatrix();
+    
     glPushMatrix();
+    //why??
     glTranslatef(-2.5, 1.0, 0.0);
     glTranslatef(1.0, 0.0, 0.0);
-    glRotatef((GLfloat)shoulder, 0.0, 0.0, 1.0);
+    glTranslatef(-1.5, 1.0, 0.0);
+    glRotatef((GLfloat)shoulder, 1.0, 0.0, 0.0);
+    glTranslatef(1.5, -1.0, 0.0);
+    //just why ?
     glPushMatrix();
     glScalef(0.2, 1.0, 0.2);
     glutWireCube(2);
@@ -135,7 +165,9 @@ void display(void)
     //Draw left Elbow
     glTranslatef(1.0, 0.0, 0.0);
     glTranslatef(-1.0, -2.0, 0.0);
+    glTranslatef(1.5, 1.0, 0.0);
     glRotatef((GLfloat)elbow, 1.0, 0.0, 0.0);
+    glTranslatef(-1.5, -1.0, 0.0);
     glPushMatrix();
     glScalef(0.2, 1.0, 0.2);
     glutWireCube(2);
@@ -143,47 +175,7 @@ void display(void)
 
 
 
-   /* //Draw finger flang 4
-    glPopMatrix();
-    glPushMatrix();
-    glTranslatef(1.0, -0.2, -0.2);
-    glRotatef((GLfloat)fingerBase3, 0.0, 0.0, 1.0);
-    glTranslatef(0.15, 0.0, 0.0);
-    glPushMatrix();
-    glScalef(0.3, 0.1, 0.1);
-    glutWireCube(1);
-    glPopMatrix();
-
-
-    //Draw finger flang 4 
-    glTranslatef(0.15, 0.0, 0.0);
-    glRotatef((GLfloat)fingerUp3, 0.0, 0.0, 1.0);
-    glTranslatef(0.15, 0.0, 0.0);
-    glPushMatrix();
-    glScalef(0.3, 0.1, 0.1);
-    glutWireCube(1);
-    glPopMatrix();
-
-    //Draw finger flang 5
-    glPopMatrix();
-    glTranslatef(1.0, -0.2, -0.4);
-    glRotatef((GLfloat)fingerBase4, 0.0, 0.0, 1.0);
-    glTranslatef(0.15, 0.0, 0.0);
-    glPushMatrix();
-    glScalef(0.3, 0.1, 0.1);
-    glutWireCube(1);
-    glPopMatrix();
-
-
-    //Draw finger flang 5 
-    glTranslatef(0.15, 0.0, 0.0);
-    glRotatef((GLfloat)fingerUp4, 0.0, 0.0, 1.0);
-    glTranslatef(0.15, 0.0, 0.0);
-    glPushMatrix();
-    glScalef(0.3, 0.1, 0.1);
-    glutWireCube(1);
-    glPopMatrix(); */
-
+   
     glPopMatrix();
     glPopMatrix();
     glutSwapBuffers();
@@ -204,147 +196,102 @@ void keyboard(unsigned char key, int x, int y)
 {
     switch (key)
     {
-    case 's':
 
-        shoulder = (shoulder + 5) % 360;
+    case 's':
+        if (shoulder == -175)
+            break;
+        shoulder = (shoulder - 5) ;
         glutPostRedisplay();
         break;
     case 'S':
-        shoulder = (shoulder - 5) % 360;
+        if (shoulder == 85)
+            break;
+        else 
+        shoulder = (shoulder + 5) ;
         glutPostRedisplay();
         break;
+
+
     case 'e':
-            elbow = (elbow + 5) % 360;
+        if (elbow == -145)
+            break;
+        else
+           elbow = (elbow - 5) ;
         glutPostRedisplay();
         break;
     case 'E':
-            elbow = (elbow - 5) % 360;
-        glutPostRedisplay();
-        break;
-    case 'f':
-            rightHip = (rightHip + 5) % 360;
-        glutPostRedisplay();
-        break;
-    case 'F':
-            rightHip = (rightHip - 5) % 360;
-        glutPostRedisplay();
-        break;
-    case 'g':
-            rightKnee = (rightKnee + 5) % 360;
-        glutPostRedisplay();
-        break;
-    case 'G':
-            rightKnee = (rightKnee - 5) % 360;
-        glutPostRedisplay();
-        break;
-
-    case '1':
-            leftHip = (leftHip + 5) % 360;
-        glutPostRedisplay();
-        break;
-    case '!':
-            leftHip = (leftHip - 5) % 360;
-        glutPostRedisplay();
-        break;
-    case '2':
-            leftKnee = (leftKnee + 5) % 360;
-        glutPostRedisplay();
-        break;
-    case '@':
-            leftKnee = (leftKnee - 5) % 360;
-        glutPostRedisplay();
-        break;
-
-   /* case '3':
-        if (fingerBase2 == 30)
+        if (elbow == 0)
             break;
         else
-            fingerBase2 = (fingerBase2 + 5) % 360;
+            elbow = (elbow + 5) ;
+        glutPostRedisplay();
+        break;
+
+
+    case '3':
+        if (rightHip == -65)
+            break;
+        else
+            rightHip = (rightHip - 5) ;
         glutPostRedisplay();
         break;
     case '#':
-        if (fingerBase2 == 0)
+        if (rightHip == 65)
             break;
         else
-            fingerBase2 = (fingerBase2 - 5) % 360;
+            rightHip = (rightHip + 5) ;
         glutPostRedisplay();
         break;
 
+
     case '4':
-        if (fingerUp2 == 140)
+        if (rightKnee == 0)
             break;
         else
-            fingerUp2 = (fingerUp2 + 5) % 360;
+            rightKnee = (rightKnee - 5) ;
         glutPostRedisplay();
         break;
     case '$':
-        if (fingerUp2 == 0)
+        if (rightKnee == 135)
             break;
         else
-            fingerUp2 = (fingerUp2 - 5) % 360;
+            rightKnee = (rightKnee + 5) ;
         glutPostRedisplay();
         break;
 
-    case '5':
-        if (fingerBase3 == 30)
+
+    case '1':
+        if (leftHip == -65)
             break;
         else
-            fingerBase3 = (fingerBase3 + 5) % 360;
+            leftHip = (leftHip - 5) ;
         glutPostRedisplay();
         break;
-    case '%':
-        if (fingerBase3 == 0)
+    case '!':
+        if (leftHip == 65)
             break;
         else
-            fingerBase3 = (fingerBase3 - 5) % 360;
+            leftHip = (leftHip + 5) ;
         glutPostRedisplay();
         break;
 
-    case '6':
-        if (fingerUp3 == 140)
+
+    case '2':
+        if (leftKnee == 0)
             break;
         else
-            fingerUp3 = (fingerUp3 + 5) % 360;
+            leftKnee = (leftKnee - 5) ;
         glutPostRedisplay();
         break;
-    case '^':
-        if (fingerUp3 == 0)
+    case '@':
+        if (leftKnee == 135)
             break;
         else
-            fingerUp3 = (fingerUp3 - 5) % 360;
+            leftKnee = (leftKnee + 5) ;
         glutPostRedisplay();
         break;
 
-    case '7':
-        if (fingerBase4 == 30)
-            break;
-        else
-            fingerBase4 = (fingerBase4 + 5) % 360;
-        glutPostRedisplay();
-        break;
-    case '&':
-        if (fingerBase4 == 0)
-            break;
-        else
-            fingerBase4 = (fingerBase4 - 5) % 360;
-        glutPostRedisplay();
-        break;
-
-    case '8':
-        if (fingerUp4 == 140)
-            break;
-        else
-            fingerUp4 = (fingerUp4 + 5) % 360;
-        glutPostRedisplay();
-        break;
-    case '*':
-        if (fingerUp4 == 0)
-            break;
-        else
-            fingerUp4 = (fingerUp4 - 5) % 360;
-        glutPostRedisplay();
-        break;*/
-
+   
 
 
     case 27:
