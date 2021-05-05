@@ -2,8 +2,8 @@
 #include <GL/glut.h>
 
 
-static int shoulder = 0, elbow = 0, rightHip = 0, rightKnee = 0;
-static int leftHip = 0, leftKnee = 0, fingerBase2 = 0, fingerUp2 = 0, fingerBase3 = 0, fingerUp3 = 0, fingerBase4 = 0, fingerUp4 = 0;
+static int shoulder = 0, shoulderSR = 0, shoulderSL =0 , elbow = 0, rightHip = 0, rightKnee = 0;
+static int leftHip = 0, leftKnee = 0, LArmL = 0, RArmL = 0, RLegL = 0, LLegL = 0, fingerBase2 = 0, fingerUp2 = 0, fingerBase3 = 0, fingerUp3 = 0, fingerBase4 = 0, fingerUp4 = 0;
 int moving, startx, starty;
 
 
@@ -54,6 +54,7 @@ void display(void)
     glTranslatef(0.15, 0.0, 0.0);
     glTranslatef(0.0, 1.0, 0.0);
     glRotatef((GLfloat)rightHip, 1.0, 0.0, 0.0);
+    glRotatef((GLfloat)RLegL, 0.0, 0.0, 1.0);
     glTranslatef(0.0, -1.0, 0.0);
 
     glPushMatrix();
@@ -91,6 +92,7 @@ void display(void)
     glTranslatef(0.15, 0.0, 0.0);
     glTranslatef(0.0, 1.0, 0.0);
     glRotatef((GLfloat)leftHip, 1.0, 0.0, 0.0);
+    glRotatef((GLfloat)LLegL, 0.0, 0.0, 1.0);
     glTranslatef(0.0, -1.0, 0.0);
     
     glPushMatrix();
@@ -112,10 +114,12 @@ void display(void)
     //Draw left Foot 
     glTranslatef(0.0, -1.2, 0.0);
     glTranslatef(0.0, 0.0, 0.0);
+
     glPushMatrix();
     glScalef(0.5, 0.2, 1.2);
     glutSolidCube(2);
     glPopMatrix();
+
     glPopMatrix();
 
     //Draw right Shoulder
@@ -127,6 +131,11 @@ void display(void)
     glRotatef((GLfloat)shoulder, 1.0, 0.0, 0.0);
     glTranslatef(1.5, -1.0, 0.0);
 
+    glRotatef((GLfloat)shoulderSR, 0.0, 1.0, 0.0);
+
+    glTranslatef(0.0, 1.0, 0.0);
+    glRotatef((GLfloat)RArmL, 0.0, 0.0, 1.0);
+    glTranslatef(0.0, -1.0, 0.0);
     glPushMatrix();
     glScalef(0.2, 1.0, 0.2);
     glutWireCube(2);
@@ -156,6 +165,12 @@ void display(void)
     glRotatef((GLfloat)shoulder, 1.0, 0.0, 0.0);
     glTranslatef(1.5, -1.0, 0.0);
     //just why ?
+
+    glRotatef((GLfloat)shoulderSL, 0.0, 1.0, 0.0);
+
+    glTranslatef(0.0, 1.0, 0.0);
+    glRotatef((GLfloat)LArmL, 0.0, 0.0, 1.0);
+    glTranslatef(0.0, -1.0, 0.0);
     glPushMatrix();
     glScalef(0.2, 1.0, 0.2);
     glutWireCube(2);
@@ -204,22 +219,49 @@ void keyboard(unsigned char key, int x, int y)
         glutPostRedisplay();
         break;
     case 'S':
-        if (shoulder == 85)
+        if (shoulder == 175)
             break;
         else 
         shoulder = (shoulder + 5) ;
         glutPostRedisplay();
         break;
 
+    case 'x':
+        if (shoulderSR == 0)
+            break;
+        shoulderSR = (shoulderSR - 5);
+        glutPostRedisplay();
+        break;
+    case 'X':
+        if (shoulderSR == 90)
+            break;
+        else
+            shoulderSR = (shoulderSR + 5);
+        glutPostRedisplay();
+        break;
 
-    case 'e':
+    case 'C':
+        if (shoulderSL == -90)
+            break;
+        shoulderSL = (shoulderSL - 5);
+        glutPostRedisplay();
+        break;
+    case 'c':
+        if (shoulderSL == 0)
+            break;
+        else
+            shoulderSL = (shoulderSL + 5);
+        glutPostRedisplay();
+        break;
+
+    case 'E':
         if (elbow == -145)
             break;
         else
            elbow = (elbow - 5) ;
         glutPostRedisplay();
         break;
-    case 'E':
+    case 'e':
         if (elbow == 0)
             break;
         else
@@ -291,7 +333,67 @@ void keyboard(unsigned char key, int x, int y)
         glutPostRedisplay();
         break;
 
-   
+    case 'd':
+        if (RLegL == 0)
+            break;
+        else
+            RLegL = (RLegL - 5);
+        glutPostRedisplay();
+        break;
+    case 'D':
+        if (RLegL == 75)
+            break;
+        else
+            RLegL = (RLegL + 5);
+        glutPostRedisplay();
+        break;
+
+    case 'A':
+        if (LLegL == -75)
+            break;
+        else
+            LLegL = (LLegL - 5);
+        glutPostRedisplay();
+        break;
+    case 'a':
+        if (LLegL == 0)
+            break;
+        else
+            LLegL = (LLegL + 5);
+        glutPostRedisplay();
+        break;
+
+    case 'r':
+        if (RArmL == 0)
+            break;
+        else
+            RArmL = (RArmL - 5);
+        glutPostRedisplay();
+        break;
+    case 'R':
+        if (RArmL == 90)
+            break;
+        else
+            RArmL = (RArmL + 5);
+        glutPostRedisplay();
+        break;
+
+    case 'L':
+        if (LArmL == -90)
+            break;
+        else
+            LArmL = (LArmL - 5);
+        glutPostRedisplay();
+        break;
+    case 'l':
+        if (LArmL == 0)
+            break;
+        else
+            LArmL = (LArmL + 5);
+        glutPostRedisplay();
+        break;
+
+
 
 
     case 27:
