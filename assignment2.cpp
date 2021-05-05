@@ -20,7 +20,7 @@ void init(void)
     glShadeModel(GL_FLAT);
 
     glMatrixMode(GL_PROJECTION);
-    gluPerspective(60.0,
+    gluPerspective(85.0,
         1.0,
         1.0, 20.0);
     glMatrixMode(GL_MODELVIEW);
