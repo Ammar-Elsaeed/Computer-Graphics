@@ -12,7 +12,8 @@ GLfloat angle2 = 0.0; /* in degrees */
 double eye[] = { 0, 0, 6.5 };
 double center[] = { 0.0, 0.0, 0.0 };
 double up[] = { 0, 1, 0 };
-double pi = 3.14;
+double pi = 3.1428571;
+double speed = 0.1;
 
 void init(void)
 {
@@ -20,9 +21,7 @@ void init(void)
     glShadeModel(GL_FLAT);
 
     glMatrixMode(GL_PROJECTION);
-    gluPerspective(85.0,
-        1.0,
-        1.0, 20.0);
+    gluPerspective(85.0, 1.0, 1.0, 20.0);
     glMatrixMode(GL_MODELVIEW);
 }
 
@@ -302,14 +301,50 @@ void moveUp()
 
     double rotationH[3];
     double direction[3];
+
     direction[0] = center[0] - eye[0];
     direction[1] = center[1] - eye[1];
     direction[2] = center[2] - eye[2];
+
     crossProduct(up, direction, rotationH);
     normalize(rotationH);
 
     rotatePoint(rotationH, (pi / 15), eye);
     rotatePoint(rotationH, (pi / 15), up);
+}
+
+// Forward and Backward
+void zoomIn()
+{
+    double direction[3];
+    direction[0] = center[0] - eye[0];
+    direction[1] = center[1] - eye[1];
+    direction[2] = center[2] - eye[2];
+
+    eye[0] += direction[0] * speed;
+    eye[1] += direction[1] * speed;
+    eye[2] += direction[2] * speed;
+
+    center[0] += direction[0] * speed;
+    center[1] += direction[1] * speed;
+    center[2] += direction[2] * speed;
+}
+
+void zoomOut()
+{
+
+    double direction[3];
+    direction[0] = center[0] - eye[0];
+    direction[1] = center[1] - eye[1];
+    direction[2] = center[2] - eye[2];
+
+    eye[0] -= direction[0] * speed;
+    eye[1] -= direction[1] * speed;
+    eye[2] -= direction[2] * speed;
+
+    center[0] -= direction[0] * speed;
+    center[1] -= direction[1] * speed;
+    center[2] -= direction[2] * speed;
 }
 
 void specialKeys(int key, int x, int y)
@@ -341,10 +376,6 @@ void keyboard(unsigned char key, int x, int y)
 {
     switch (key)
     {
-    case '0':
-        defaultCamera();
-        glutPostRedisplay();
-        break;
 
     case 's':
         if (shoulder == -175)
@@ -523,7 +554,22 @@ void keyboard(unsigned char key, int x, int y)
         glutPostRedisplay();
         break;
 
-    case 27:
+    case 'i': // Zoom in
+        zoomIn();
+        glutPostRedisplay();
+        break;
+
+    case 'o': // Zoom out
+        zoomOut();
+        glutPostRedisplay();
+        break;
+
+    case '0': // Reset camera angle
+        defaultCamera();
+        glutPostRedisplay();
+        break;
+
+    case 29:
         exit(0);
         break;
     default:
